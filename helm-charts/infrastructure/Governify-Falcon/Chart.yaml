@@ -1,0 +1,15 @@
+apiVersion: v2
+name: Governify-Falcon
+description: Helm Chart for Governify Falcon deployment on Kubernetes
+type: application
+version: 0.1.0
+appVersion: "v1.0.0"
+
+dependencies:
+  - name: assets-manager
+    version: "*"
+    repository: "file://../../services/assets-manager"
+    alias: assets_manager
+  - name: render
+    version: "*"
+    repository: "file://../../services/render"

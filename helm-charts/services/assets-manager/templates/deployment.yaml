@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  namespace: governify-{{ .Values.global.infrastructure }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+    spec:
+      containers:
+        - env:
+          - name: NODE_ENV
+            value: production
+          - name: PORT
+            value: {{ if eq .Values.global.node_env "production"}}80{{ else }}5200{{ end }}
+          - name: LOGIN_USER
+            value: {{ .Values.login_user }}
+          - name: LOGIN_PASSWORD
+            value: {{ .Values.login_password }}
+          - name: ASSETS_REPOSITORY
+            value: {{ .Values.assets_repository }}
+          - name: ASSETS_REPOSITORY_BRANCH
+            value: {{ .Values.assets_repository_branch }}
+          {{- if eq .Values.global.node_env "development" }}
+          - name: GOV_INFRASTRUCTURE
+            value: {{ .Values.gov_infrastructure }}
+          {{- else }}
+          - name: SERVICES_PREFIX
+            value: {{ .Values.global.services_prefix }}
+          - name: DNS_SUFFIX
+            value: {{ .Values.global.dns_suffix }}
+          {{- end }}
+
+          image: governify/assets-manager:{{ if eq .Values.global.node_env "production" }}{{ .Chart.AppVersion }}{{ else }}develop{{ end }}
+          imagePullPolicy: Always
+          name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+          ports:
+            - containerPort: {{ if eq .Values.global.node_env "production"}}80{{ else }}5200{{ end }}
+              protocol: TCP
+          resources:
+            requests:
+              memory: 300Mi
+            limits:
+              memory: 900Mi

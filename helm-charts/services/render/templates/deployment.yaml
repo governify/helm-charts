@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  namespace: governify-{{ .Values.global.infrastructure }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: {{ .Values.global.node_env }}
+            - name: PORT
+              value: {{ if eq .Values.global.node_env "production"}}80{{ else }}5100{{ end }}
+            - name: LOGIN_USER
+              value: {{ .Values.login_user }}
+            - name: LOGIN_PASSWORD
+              value: {{ .Values.login_password }}
+            - name: DEFAULT_VIEW
+              value: 'http://{{ .Values.global.infrastructure }}-assets-manager/api/v1/public/renders/index/view.html'
+            - name: DEFAULT_CONTROLLER
+              value: 'http://{{ .Values.global.infrastructure }}-assets-manager/api/v1/public/renders/index/controller.js'
+            - name: DEFAULT_MODEL
+              value: 'http://{{ .Values.global.infrastructure }}-assets-manager/api/v1/public/renders/index/model.json'
+            - name: LAYOUT
+              value: {{ .Values.layout }}
+            - name: GOV_INFRASTRUCTURE
+              value: {{ .Values.global.gov_infrastructure }}
+                  
+          image: governify/render:{{ if eq .Values.global.node_env "production" }}{{ .Chart.AppVersion }}{{ else }}develop{{ end }}
+          imagePullPolicy: Always
+          name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+          ports:
+            - containerPort: {{ if eq .Values.global.node_env "production"}}80{{ else }}5100{{ end }}
+              protocol: TCP
+          resources:
+            requests:
+              memory: 300Mi
+            limits:
+              memory: 500Mi
+      securityContext: {}
