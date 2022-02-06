@@ -1,9 +1,0 @@
-dependencies:
-- name: assets-manager
-  repository: file://../../services/assets-manager
-  version: 0.1.0
-- name: render
-  repository: file://../../services/render
-  version: 0.1.0
-digest: sha256:a3a5cfa39d17f455fbe7487297f19d8431ffc6afb508e3810e94f08927bdd80a
-generated: "2022-02-06T01:06:44.9991527+01:00"
