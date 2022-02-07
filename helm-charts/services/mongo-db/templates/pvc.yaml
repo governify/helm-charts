@@ -1,0 +1,15 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  namespace: governify-{{ .Values.global.infrastructure }}
+  labels:
+    app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---

@@ -5,5 +5,11 @@ dependencies:
 - name: render
   repository: file://../../services/render
   version: 0.1.0
-digest: sha256:a3a5cfa39d17f455fbe7487297f19d8431ffc6afb508e3810e94f08927bdd80a
-generated: "2022-02-06T01:06:44.9991527+01:00"
+- name: registry
+  repository: file://../../services/registry
+  version: 0.1.0
+- name: mongo-db
+  repository: file://../../services/mongo-db
+  version: 0.1.0
+digest: sha256:d4e38e19ac3e7e0abe66487fa3dd94c88b90b3820905c9a6b84b5a3622b31cec
+generated: "2022-02-07T01:38:48.0065686+01:00"

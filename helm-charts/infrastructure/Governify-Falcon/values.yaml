@@ -2,6 +2,6 @@ global:
   node_env: production
   infrastructure: falcon
 
-assets_manager:
+assets-manager:
   assets_repository: https://github.com/governify/assets-falcon
   assets_repository_branch: main

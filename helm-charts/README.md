@@ -1,7 +1,7 @@
 # Governify Helm Charts
 
 ## Installation
-Governify Kubernetes implementation consists in a set of services embedded in Helm charts, which are used by infrastructure charts as dependencies in order to deploy each system with custom configuration. Available charts infrastructures found at [infrastructure subdirectory](https://governify.github.io/helm-charts/infrastructure).
+Governify Kubernetes implementation consists in a set of services embedded in Helm charts, which are used by infrastructure charts as dependencies in order to deploy each system with custom configuration.
 
 ### Production
 
@@ -29,7 +29,6 @@ $    kubectl apply -f https://github.com/jetstack/cert-manager/releases/download
 ```
     global:
         node_env: production
-        infrastructure <name_of_infrastructure>
         gov_infrastructure: <assets_call_to_infrastructure.yaml>
     
     assets_manager:
@@ -61,7 +60,6 @@ $    kubectl create namespace <namespace>
 ```
     global:
         node_env: development
-        infrastructure <name_of_infrastructure>
         gov_infrastructure: <assets_call_to_infrastructure-local.yaml>
     
     assets_manager:

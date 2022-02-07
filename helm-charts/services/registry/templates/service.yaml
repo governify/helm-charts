@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+    idle: 'true'
+  name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  namespace: governify-{{ .Values.global.infrastructure }}
+spec:
+  {{- if eq .Values.global.node_env "development" }}
+  type: NodePort
+  {{- end }}
+  ports:
+    - name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+      port: {{ if eq .Values.global.node_env "production"}}80{{ else }}5400{{ end }}
+      protocol: TCP
+      targetPort: {{ if eq .Values.global.node_env "production"}}80{{ else }}5400{{ end }}
+      {{- if eq .Values.global.node_env "development" }}
+      nodePort: 5400
+      {{- end }}
+  selector:
+    app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}

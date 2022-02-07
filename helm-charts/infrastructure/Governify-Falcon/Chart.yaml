@@ -9,7 +9,14 @@ dependencies:
   - name: assets-manager
     version: "*"
     repository: "file://../../services/assets-manager"
-    alias: assets_manager
+    alias: assets-manager
   - name: render
     version: "*"
     repository: "file://../../services/render"
+  - name: registry
+    version: "*"
+    repository: "file://../../services/registry"
+  - name: mongo-db
+    version: "*"
+    repository: "file://../../services/mongo-db"
+    alias: mongo-registry
