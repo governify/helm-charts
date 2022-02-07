@@ -4,11 +4,9 @@ kind: HTTPProxy
 metadata:
   name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-httpproxy
   namespace: governify-{{ .Values.global.infrastructure }}
-  annotations:
-    nginx.ingress.kubernetes.io/enable-cors: "true"
 spec:
   virtualhost:
-    fqdn: ui{{ .Values.global.services_prefix }}{{ .Values.global.dns_suffix }}
+    fqdn: reporter{{ .Values.global.services_prefix }}{{ .Values.global.dns_suffix }}
     tls:
       secretName: {{ .Values.global.infrastructure }}-certs
   routes:

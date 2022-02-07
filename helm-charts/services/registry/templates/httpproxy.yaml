@@ -14,7 +14,7 @@ spec:
   virtualhost:
     fqdn: registry{{ .Values.global.services_prefix }}{{ .Values.global.dns_suffix }}
     tls:
-      secretName: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-cert
+      secretName: {{ .Values.global.infrastructure }}-certs
   routes:
   - services:
     - name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}

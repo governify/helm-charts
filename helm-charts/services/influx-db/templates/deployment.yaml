@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  namespace: governify-{{ .Values.global.infrastructure }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+    spec:
+      containers:
+        - image: influxdb:{{ .Chart.AppVersion }}
+          imagePullPolicy: Always
+          name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+          ports:
+            - containerPort: 8086
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /var/lib/influxdb
+              name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-db-volume
+      volumes:
+        - name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-db-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}

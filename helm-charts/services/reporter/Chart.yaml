@@ -1,0 +1,6 @@
+apiVersion: v2
+name: reporter
+description: Helm Chart for Governify Reporter Service
+type: application
+version: 0.1.0
+appVersion: "v2.2.0"

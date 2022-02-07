@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  namespace: governify-{{ .Values.global.infrastructure }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: {{ .Values.global.node_env }}
+            - name: PORT
+              value: {{ if eq .Values.global.node_env "production"}}80{{ else }}5501{{ end }}
+            - name: GOV_INFRASTRUCTURE
+              value: {{ .Values.global.gov_infrastructure }}
+            - name: CREDENTIALS_ELK
+              value: {{ .Values.global.credentials_elk }}
+                  
+          image: governify/render:{{ if eq .Values.global.node_env "production" }}{{ .Chart.AppVersion }}{{ else }}develop{{ end }}
+          imagePullPolicy: Always
+          name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+          ports:
+            - containerPort: {{ if eq .Values.global.node_env "production"}}80{{ else }}5501{{ end }}
+              protocol: TCP
+          resources:
+            requests:
+              memory: 400Mi
+            limits:
+              memory: 400Mi
+      securityContext: {}
