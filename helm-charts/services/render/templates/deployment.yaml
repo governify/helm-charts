@@ -23,9 +23,15 @@ spec:
             - name: PORT
               value: {{ if eq .Values.global.node_env "production"}}80{{ else }}5100{{ end }}
             - name: LOGIN_USER
-              value: {{ .Values.login_user }}
+            valueFrom:
+              secretKeyRef:
+                  name: {{ .Values.global.infrastructure }}-secrets
+                  key: LOGIN_USER
             - name: LOGIN_PASSWORD
-              value: {{ .Values.login_password }}
+              valueFrom:
+                secretKeyRef:
+                    name: {{ .Values.global.infrastructure }}-secrets
+                    key: LOGIN_PASSWORD
             - name: DEFAULT_VIEW
               value: 'http://{{ .Values.global.infrastructure }}-assets-manager/api/v1/public/renders/index/view.html'
             - name: DEFAULT_CONTROLLER

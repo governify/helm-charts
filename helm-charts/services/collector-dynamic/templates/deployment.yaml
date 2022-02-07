@@ -25,7 +25,10 @@ spec:
             - name: GOV_INFRASTRUCTURE
               value: {{ .Values.global.gov_infrastructure }}
             - name: CREDENTIALS_ELK
-              value: {{ .Values.global.credentials_elk }}
+              valueFrom:
+              secretKeyRef:
+                  name: {{ .Values.global.infrastructure }}-secrets
+                  key: CREDENTIALS_ELK
                   
           image: governify/render:{{ if eq .Values.global.node_env "production" }}{{ .Chart.AppVersion }}{{ else }}develop{{ end }}
           imagePullPolicy: Always

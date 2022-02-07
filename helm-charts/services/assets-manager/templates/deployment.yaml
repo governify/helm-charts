@@ -23,9 +23,15 @@ spec:
           - name: PORT
             value: {{ if eq .Values.global.node_env "production"}}80{{ else }}5200{{ end }}
           - name: LOGIN_USER
-            value: {{ .Values.login_user }}
+            valueFrom:
+              secretKeyRef:
+                  name: {{ .Values.global.infrastructure }}-secrets
+                  key: LOGIN_USER
           - name: LOGIN_PASSWORD
-            value: {{ .Values.login_password }}
+            valueFrom:
+              secretKeyRef:
+                  name: {{ .Values.global.infrastructure }}-secrets
+                  key: LOGIN_PASSWORD
           - name: ASSETS_REPOSITORY
             value: {{ .Values.assets_repository }}
           - name: ASSETS_REPOSITORY_BRANCH
