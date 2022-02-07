@@ -1,0 +1,18 @@
+{{- if eq .Values.global.node_env "production" }}
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-httpproxy
+  namespace: governify-{{ .Values.global.infrastructure }}
+spec:
+  virtualhost:
+    fqdn: dashboard{{ .Values.global.services_prefix }}{{ .Values.global.dns_suffix }}
+    tls:
+      secretName: {{ .Values.global.infrastructure }}-certs
+  routes:
+  - services:
+    - name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+      port: 3000
+    loadBalancerPolicy:
+      strategy: Cookie
+{{- end }}

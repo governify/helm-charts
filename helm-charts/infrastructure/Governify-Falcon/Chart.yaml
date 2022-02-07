@@ -20,3 +20,7 @@ dependencies:
     version: "*"
     repository: "file://../../services/mongo-db"
     alias: mongo-registry
+  - name: influx-db
+    version: "*"
+    repository: "file://../../services/influx-db"
+    alias: influx-reporter

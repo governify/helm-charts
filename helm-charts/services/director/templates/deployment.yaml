@@ -21,24 +21,21 @@ spec:
             - name: NODE_ENV
               value: {{ .Values.global.node_env }}
             - name: PORT
-              value: {{ if eq .Values.global.node_env "production"}}80{{ else }}5501{{ end }}
+              value: {{ if eq .Values.global.node_env "production"}}80{{ else }}5800{{ end }}
             - name: GOV_INFRASTRUCTURE
               value: {{ .Values.global.gov_infrastructure }}
-            - name: CREDENTIALS_ELK
-              valueFrom:
-              secretKeyRef:
-                  name: {{ .Values.global.infrastructure }}-secrets
-                  key: CREDENTIALS_ELK
+            - name: INFLUXDB_BIND_ADDRESS
+              value: {{ .Values.influx_bind_address }}
                   
-          image: governify/collector-dynamic:{{ if eq .Values.global.node_env "production" }}{{ .Chart.AppVersion }}{{ else }}develop{{ end }}
+          image: governify/director:{{ if eq .Values.global.node_env "production" }}{{ .Chart.AppVersion }}{{ else }}develop{{ end }}
           imagePullPolicy: Always
           name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
           ports:
-            - containerPort: {{ if eq .Values.global.node_env "production"}}80{{ else }}5501{{ end }}
+            - containerPort: {{ if eq .Values.global.node_env "production"}}80{{ else }}5800{{ end }}
               protocol: TCP
           resources:
             requests:
-              memory: 400Mi
+              memory: 300Mi
             limits:
               memory: 400Mi
       securityContext: {}

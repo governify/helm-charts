@@ -33,11 +33,11 @@ spec:
                     name: {{ .Values.global.infrastructure }}-secrets
                     key: LOGIN_PASSWORD
             - name: DEFAULT_VIEW
-              value: 'http://{{ .Values.global.infrastructure }}-assets-manager/api/v1/public/renders/index/view.html'
+              value: 'http://{{ .Values.global.infrastructure }}-assets-manager:{{ if eq .Values.global.node_env "production" }}80{{ else }}5200{{ end }}/api/v1/public/renders/index/view.html'
             - name: DEFAULT_CONTROLLER
-              value: 'http://{{ .Values.global.infrastructure }}-assets-manager/api/v1/public/renders/index/controller.js'
+              value: 'http://{{ .Values.global.infrastructure }}-assets-manager:{{ if eq .Values.global.node_env "production" }}80{{ else }}5200{{ end }}/api/v1/public/renders/index/controller.js'
             - name: DEFAULT_MODEL
-              value: 'http://{{ .Values.global.infrastructure }}-assets-manager/api/v1/public/renders/index/model.json'
+              value: 'http://{{ .Values.global.infrastructure }}-assets-manager:{{ if eq .Values.global.node_env "production" }}80{{ else }}5200{{ end }}/api/v1/public/renders/index/model.json'
             - name: LAYOUT
               value: {{ .Values.layout }}
             - name: GOV_INFRASTRUCTURE
