@@ -21,14 +21,16 @@ spec:
             - name: NODE_ENV
               value: {{ .Values.global.node_env }}
             - name: PORT
-              value: {{ if eq .Values.global.node_env "production"}}80{{ else }}5501{{ end }}
+              value: {{ if eq .Values.global.node_env "production"}}"80"{{ else }}"5501"{{ end }}
             - name: GOV_INFRASTRUCTURE
               value: {{ .Values.global.gov_infrastructure }}
+            {{- if .Values.global.credentials_elk }}
             - name: CREDENTIALS_ELK
               valueFrom:
-              secretKeyRef:
-                  name: {{ .Values.global.infrastructure }}-secrets
-                  key: CREDENTIALS_ELK
+                secretKeyRef:
+                    name: {{ .Values.global.infrastructure }}-secrets
+                    key: CREDENTIALS_ELK
+            {{- end }}
                   
           image: governify/collector-dynamic:{{ if eq .Values.global.node_env "production" }}{{ .Chart.AppVersion }}{{ else }}develop{{ end }}
           imagePullPolicy: Always

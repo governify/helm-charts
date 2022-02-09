@@ -17,12 +17,18 @@ spec:
         app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
     spec:
       containers:
-        - image: influxdb:{{ .Chart.AppVersion }}
+        - env:
+            - name: INFLUXDB_BIND_ADDRESS
+              value: ":{{ .Values.influx_bind_address }}"
+
+          image: influxdb:{{ .Chart.AppVersion }}
           imagePullPolicy: Always
           name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
           ports:
             - containerPort: 8086
               protocol: TCP
+            - containerPort: {{ .Values.influx_bind_address }}
+              name: backup
           volumeMounts:
             - mountPath: /var/lib/influxdb
               name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-db-volume

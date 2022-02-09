@@ -11,5 +11,23 @@ dependencies:
 - name: mongo-db
   repository: file://../../services/mongo-db
   version: 0.1.0
-digest: sha256:d4e38e19ac3e7e0abe66487fa3dd94c88b90b3820905c9a6b84b5a3622b31cec
-generated: "2022-02-07T01:38:48.0065686+01:00"
+- name: reporter
+  repository: file://../../services/reporter
+  version: 0.1.0
+- name: influx-db
+  repository: file://../../services/influx-db
+  version: 0.1.0
+- name: collector-dynamic
+  repository: file://../../services/collector-dynamic
+  version: 0.1.0
+- name: dashboard
+  repository: file://../../services/dashboard
+  version: 0.1.0
+- name: director
+  repository: file://../../services/director
+  version: 0.1.0
+- name: prometheus
+  repository: file://../../services/prometheus
+  version: 0.1.0
+digest: sha256:bf9af1a6941cdc432f85a96eeb2ba1184f62bdfafb15af3ba761673b5ba966a6
+generated: "2022-02-09T00:09:32.0225559+01:00"

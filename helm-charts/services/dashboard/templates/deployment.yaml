@@ -23,7 +23,7 @@ spec:
             - name: GOV_INFRASTRUCTURE
               value: {{ .Values.global.gov_infrastructure }}
             - name: INFLUX_URL
-              value: http://{{ .Values.global.infrastructure }}-influx-reporter:{{ if eq .Values.global.node_env "production" }}8086{{ else }}5002{{ end }}
+              value: http://{{ .Values.global.infrastructure }}-influx-reporter:8086
             - name: GF_PATHS_PLUGINS
               value: {{ .Values.gf_path_plugins }}
 

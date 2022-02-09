@@ -21,12 +21,12 @@ spec:
             - name: NODE_ENV
               value: {{ .Values.global.node_env }}
             - name: PORT
-              value: {{ if eq .Values.global.node_env "production"}}80{{ else }}5100{{ end }}
+              value: {{ if eq .Values.global.node_env "production"}}"80"{{ else }}"5100"{{ end }}
             - name: LOGIN_USER
-            valueFrom:
-              secretKeyRef:
-                  name: {{ .Values.global.infrastructure }}-secrets
-                  key: LOGIN_USER
+              valueFrom:
+                secretKeyRef:
+                    name: {{ .Values.global.infrastructure }}-secrets
+                    key: LOGIN_USER
             - name: LOGIN_PASSWORD
               valueFrom:
                 secretKeyRef:

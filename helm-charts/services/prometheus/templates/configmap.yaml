@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-config
+  namespace: governify-{{ .Values.global.infrastructure }}
+data:
+  config.yaml: |
+    {{- if .Values.config.global }}
+    global:
+      {{- .Values.config.global | toYaml | trimSuffix "\n" | nindent 6 }}
+    {{- end }}
+
+    {{- if .Values.config.rule_files }}
+    rule_files:
+      {{- .Values.config.rule_files | toYaml | trimSuffix "\n" | nindent 6 }}
+    {{- end }}
+
+    {{- if .Values.config.scrape_configs }}
+    scrape_configs:
+      {{- .Values.config.scrape_configs | toYaml | trimSuffix "\n" | nindent 6 }}
+    {{- end }}
+
+    {{- if .Values.config.alerting }}
+    alerting:
+      {{- .Values.config.alerting | toYaml | trimSuffix "\n" | nindent 6 }}
+    {{- end }}
+
+    {{- if .Values.config.remote_write }}
+    remote_write:
+      {{- .Values.config.remote_write | toYaml | trimSuffix "\n" | nindent 6 }}
+    {{- end }}
+
+    {{- if .Values.config.remote_read }}
+    remote_read:
+      {{- .Values.config.remote_read | toYaml | trimSuffix "\n" | nindent 6 }}
+    {{- end }}
+
+    {{- if .Values.config.storage }}
+    storage:
+      {{- .Values.config.storage | toYaml | trimSuffix "\n" | nindent 6 }}
+    {{- end }}

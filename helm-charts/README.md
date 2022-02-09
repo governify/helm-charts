@@ -56,25 +56,23 @@ $    helm install -f values.yaml <release_name> governify/<chart_name>
 $    kubectl create namespace <namespace>
 ```
 
-2. Create a values.yaml file with the following content
+2. Configure kubernetes for assigning NodePorts in range (3000-9000) by adding `--service-node-port-range=3000-6000` to the kubernetes kube-apiserver config file. If using docker-desktop [check this page](https://stackoverflow.com/questions/64758012/location-of-kubernetes-config-directory-with-docker-desktop-on-windows).
+
+3. Create a values.yaml file with the following content
 ```
     global:
         node_env: development
         gov_infrastructure: <assets_call_to_infrastructure-local.yaml>
-    
+        login_user: <username>
+        login_password: <password>
+
     assets_manager:
         gov_infrastructure: <local_path_to_infrastructure-local.yaml>
-        assets_repository: <repository_url>
-        assets_repository_branch: <branch>
-        login_user: <username>
-        login_password: <password>
-    
-    render:
-        login_user: <username>
-        login_password: <password>
+        assets_repository: <repository_url> (defaults to current assets repository inside github governify organization)
+        assets_repository_branch: <branch> (default: main)
 ```
 
-3. Install charts
+4. Install charts
 ```
 $    helm repo add governify https://governify.github.io/helm-charts
 $    helm repo update

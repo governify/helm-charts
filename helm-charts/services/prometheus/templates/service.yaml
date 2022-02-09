@@ -11,19 +11,11 @@ spec:
   {{- end }}
   ports:
     - name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
-      port: 8086
+      port: 9090
       protocol: TCP
-      targetPort: 8086
+      targetPort: 9090
       {{- if eq .Values.global.node_env "development" }}
-      nodePort: 5002
-      {{- end }}
-
-    - name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-backup
-      port: {{ .Values.influx_bind_address }}
-      protocol: TCP
-      targetPort: {{ .Values.influx_bind_address }}
-      {{- if eq .Values.global.node_env "development" }}
-      nodePort: {{ .Values.influx_bind_address }}
+      nodePort: 5900
       {{- end }}
   selector:
     app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}

@@ -5,11 +5,14 @@ type: application
 version: 0.1.0
 appVersion: "v1.0.0"
 
+maintainers:
+  - name: "ISA Group"
+    url: "https://www.isa.us.es"
+
 dependencies:
   - name: assets-manager
     version: "*"
     repository: "file://../../services/assets-manager"
-    alias: assets-manager
   - name: render
     version: "*"
     repository: "file://../../services/render"
@@ -20,7 +23,22 @@ dependencies:
     version: "*"
     repository: "file://../../services/mongo-db"
     alias: mongo-registry
+  - name: reporter
+    version: "*"
+    repository: "file://../../services/reporter"
   - name: influx-db
     version: "*"
     repository: "file://../../services/influx-db"
     alias: influx-reporter
+  - name: collector-dynamic
+    version: "*"
+    repository: "file://../../services/collector-dynamic"
+  - name: dashboard
+    version: "*"
+    repository: "file://../../services/dashboard"
+  - name: director
+    version: "*"
+    repository: "file://../../services/director"
+  - name: prometheus
+    version: "*"
+    repository: "file://../../services/prometheus"

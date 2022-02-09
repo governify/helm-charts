@@ -21,7 +21,7 @@ spec:
           - name: NODE_ENV
             value: {{ .Values.global.node_env }}
           - name: PORT
-            value: {{ if eq .Values.global.node_env "production"}}80{{ else }}5400{{ end }}
+            value: {{ if eq .Values.global.node_env "production"}}"80"{{ else }}"5400"{{ end }}
           - name: GOV_INFRASTRUCTURE
             value: {{ .Values.global.gov_infrastructure }}
 

@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  namespace: governify-{{ .Values.global.infrastructure }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+    spec:
+      containers:
+        - image: prom/prometheus:{{ .Chart.AppVersion }}
+          imagePullPolicy: Always
+          name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+          args:
+            - --config.file=/etc/prometheus/config.yaml
+          ports:
+            - containerPort: 9090
+              protocol: TCP
+          resources:
+            requests:
+              memory: 300Mi
+            limits:
+              memory: 500Mi
+          
+          volumeMounts:
+            - mountPath: /home/project
+              name: {{ .Values.global.infrastructure }}-assets-manager-volume
+              readOnly: true
+            - mountPath: /etc/prometheus/
+              name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-config
+              readOnly: true
+      volumes:
+        - name: {{ .Values.global.infrastructure }}-assets-manager-volume
+          persistentVolumeClaim:
+            claimName: {{ .Values.global.infrastructure }}-assets-manager
+        - name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-config
+          configMap:
+            name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-config
+      securityContext: {}
