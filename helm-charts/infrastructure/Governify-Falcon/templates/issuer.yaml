@@ -1,0 +1,16 @@
+{{- if eq .Values.global.node_env "production" }}
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ .Values.global.infrastructure }}-letsencrypt
+  namespace: governify-{{ .Values.global.infrastructure }}
+spec:
+  acme:
+    privateKeySecretRef:
+      name: {{ .Values.global.infrastructure }}-letsencrypt
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+    - http01:
+        ingress:
+          class: contour
+{{- end }}
