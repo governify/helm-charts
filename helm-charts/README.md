@@ -30,16 +30,15 @@ $    kubectl apply -f https://github.com/jetstack/cert-manager/releases/download
     global:
         node_env: production
         gov_infrastructure: <assets_call_to_infrastructure.yaml>
+        services_prefix: .<infrastructure-prefix>
+        dns_suffix: .<your-DNS-zone>
+        login_user: <username>
+        login_password: <password>
     
     assets_manager:
         assets_repository: <repository_url>
         assets_repository_branch: <branch>
-        login_user: <username>
-        login_password: <password>
-    
-    render:
-        login_user: <username>
-        login_password: <password>
+        private_key: test-key
 ```
 
 6. Install charts
