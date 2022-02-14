@@ -8,6 +8,10 @@ spec:
   dnsNames:
     - assets{{ .Values.global.services_prefix }}{{ .Values.global.dns_suffix }}
     - ui{{ .Values.global.services_prefix }}{{ .Values.global.dns_suffix }}
+    - dashboard{{ .Values.global.services_prefix }}{{ .Values.global.dns_suffix }}
+    - director{{ .Values.global.services_prefix }}{{ .Values.global.dns_suffix }}
+    - registry{{ .Values.global.services_prefix }}{{ .Values.global.dns_suffix }}
+    - reporter{{ .Values.global.services_prefix }}{{ .Values.global.dns_suffix }}
   issuerRef:
     name: {{ .Values.global.infrastructure }}-letsencrypt
     kind: Issuer
