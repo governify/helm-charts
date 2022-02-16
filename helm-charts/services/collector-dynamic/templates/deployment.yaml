@@ -24,7 +24,7 @@ spec:
               value: {{ if eq .Values.global.node_env "production"}}"80"{{ else }}"5501"{{ end }}
             - name: GOV_INFRASTRUCTURE
               value: {{ .Values.global.gov_infrastructure }}
-            {{- if .Values.global.credentials_elk }}
+            {{- if .Values.credentials_elk }}
             - name: CREDENTIALS_ELK
               valueFrom:
                 secretKeyRef:
