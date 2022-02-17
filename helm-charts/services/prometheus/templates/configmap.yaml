@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}-config
-  namespace: governify-{{ .Values.global.infrastructure }}
+  namespace: {{ if .Values.global.namespaceOverride }}{{.Values.global.namespaceOverride}}{{ else }}governify-{{ .Values.global.infrastructure }}{{ end }}
 data:
   config.yaml: |
     {{- if .Values.config.global }}

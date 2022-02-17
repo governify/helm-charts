@@ -3,7 +3,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: {{ .Values.global.infrastructure }}-letsencrypt
-  namespace: governify-{{ .Values.global.infrastructure }}
+  namespace: {{ if .Values.global.namespaceOverride }}{{.Values.global.namespaceOverride}}{{ else }}governify-{{ .Values.global.infrastructure }}{{ end }}
 spec:
   acme:
     privateKeySecretRef:

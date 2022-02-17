@@ -5,7 +5,7 @@ metadata:
     app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
     idle: 'true'
   name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
-  namespace: governify-{{ .Values.global.infrastructure }}
+  namespace: {{ if .Values.global.namespaceOverride }}{{.Values.global.namespaceOverride}}{{ else }}governify-{{ .Values.global.infrastructure }}{{ end }}
 spec:
   {{- if eq .Values.global.node_env "development" }}
   type: NodePort

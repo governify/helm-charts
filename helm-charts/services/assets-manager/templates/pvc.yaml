@@ -3,7 +3,7 @@ kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
   name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
-  namespace: governify-{{ .Values.global.infrastructure }}
+  namespace: {{ if .Values.global.namespaceOverride }}{{.Values.global.namespaceOverride}}{{ else }}governify-{{ .Values.global.infrastructure }}{{ end }}
   labels:
     app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
 spec:
