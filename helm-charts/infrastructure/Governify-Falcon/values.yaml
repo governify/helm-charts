@@ -5,4 +5,4 @@ global:
 assets-manager:
   assets_repository: https://github.com/governify/assets-falcon
   assets_repository_branch: main
-  private_key: test
+  private_key: defaultkey
