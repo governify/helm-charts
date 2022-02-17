@@ -1,1 +1,2 @@
 influx_bind_address: 8088
+volume_storage: 5Gi
