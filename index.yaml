@@ -1,0 +1,50 @@
+apiVersion: v1
+entries:
+  Governify-Falcon:
+  - apiVersion: v2
+    appVersion: v1.0.0
+    created: "2022-02-19T23:42:25.205452838Z"
+    dependencies:
+    - name: assets-manager
+      repository: file://../../services/assets-manager
+      version: '*'
+    - name: render
+      repository: file://../../services/render
+      version: '*'
+    - name: registry
+      repository: file://../../services/registry
+      version: '*'
+    - alias: mongo-registry
+      name: mongo-db
+      repository: file://../../services/mongo-db
+      version: '*'
+    - name: reporter
+      repository: file://../../services/reporter
+      version: '*'
+    - alias: influx-reporter
+      name: influx-db
+      repository: file://../../services/influx-db
+      version: '*'
+    - name: collector-dynamic
+      repository: file://../../services/collector-dynamic
+      version: '*'
+    - name: dashboard
+      repository: file://../../services/dashboard
+      version: '*'
+    - name: director
+      repository: file://../../services/director
+      version: '*'
+    - name: prometheus
+      repository: file://../../services/prometheus
+      version: '*'
+    description: Helm Chart for Governify Falcon deployment on Kubernetes
+    digest: 6c3aee077bb99f43c6412344731de6df8c06a117040d299dc03d5c4aae3160c2
+    maintainers:
+    - name: ISA Group
+      url: https://www.isa.us.es
+    name: Governify-Falcon
+    type: application
+    urls:
+    - https://github.com/governify/helm-charts/releases/download/Governify-Falcon-0.1.0/Governify-Falcon-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-02-19T23:42:25.205458738Z"
