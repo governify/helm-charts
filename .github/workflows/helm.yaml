@@ -2,8 +2,9 @@ name: Release Charts
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+    paths-ignore:
+      - '**/*.md'
 
 jobs:
   release:

@@ -65,7 +65,7 @@ $    kubectl create namespace <namespace>
         login_user: <username>
         login_password: <password>
 
-    assets_manager:
+    assets-manager:
         gov_infrastructure: <local_path_to_infrastructure-local.yaml>
         assets_repository: <repository_url> (defaults to current assets repository inside github governify organization)
         assets_repository_branch: <branch> (default: main)
