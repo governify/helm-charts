@@ -1,0 +1,89 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  namespace: {{ if .Values.global.namespaceOverride }}{{.Values.global.namespaceOverride}}{{ else }}governify-{{ .Values.global.infrastructure }}{{ end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+    spec:
+      containers:
+      - env:
+          - name: NODE_ENV
+            value: {{ .Values.global.node_env }}
+          - name: PORT
+            value: {{ if eq .Values.global.node_env "production"}}"80"{{ else }}"5500"{{ end }}
+          - name: REDIS_HOSTNAME
+            value: {{ .Values.redis_host_name }}
+          {{- if .Values.private_key }}
+          - name: KEY_SCOPE_MANAGER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.global.infrastructure }}-secrets
+                key: SCOPE_PRIVATE_KEY
+          {{- end}}
+          {{- if .Values.key_github }}
+          - name: KEY_GITHUB
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.global.infrastructure }}-secrets
+                key: KEY_GITHUB
+          {{- end }}
+          {{- if .Values.key_pivotal }}
+          - name: KEY_PIVOTAL
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.global.infrastructure }}-secrets
+                key: KEY_PIVOTAL
+          {{- end }}
+          {{- if .Values.key_travis_public }}
+          - name: KEY_TRAVIS_PUBLIC
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.global.infrastructure }}-secrets
+                key: KEY_TRAVIS_PUBLIC
+          {{- end }}
+          {{- if .Values.key_travis_private }}
+          - name: KEY_TRAVIS_PRIVATE
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.global.infrastructure }}-secrets
+                key: KEY_TRAVIS_PRIVATE
+          {{- end }}
+          {{- if .Values.key_heroku }}
+          - name: KEY_HEROKU
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.global.infrastructure }}-secrets
+                key: KEY_HEROKU
+          {{- end}}
+          {{- if .Values.key_codeclimate }}
+          - name: KEY_CODECLIMATE
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.global.infrastructure }}-secrets
+                key: KEY_CODECLIMATE
+          {{- end }}
+          - name: GOV_INFRASTRUCTURE
+            value: {{ .Values.global.gov_infrastructure }}
+          
+        image: governify/collector-events:{{ if eq .Values.global.node_env "production" }}{{ .Chart.AppVersion }}{{ else }}develop{{ end }}
+        imagePullPolicy: Always
+        name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+        ports:
+          - containerPort: {{ if eq .Values.global.node_env "production"}}80{{ else }}5500{{ end }}
+            protocol: TCP
+        resources:
+          requests:
+            memory: 300Mi
+          limits:
+            memory: 900Mi

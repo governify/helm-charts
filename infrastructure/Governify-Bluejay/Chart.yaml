@@ -1,0 +1,51 @@
+apiVersion: v2
+name: Governify-Bluejay
+description: Helm Chart for Governify Bluejay deployment on Kubernetes
+type: application
+version: 0.1.0
+appVersion: "v1.0.0"
+
+maintainers:
+  - name: "ISA Group"
+    url: "https://www.isa.us.es"
+
+dependencies:
+  - name: assets-manager
+    version: "*"
+    repository: "file://../../services/assets-manager"
+  - name: render
+    version: "*"
+    repository: "file://../../services/render"
+  - name: registry
+    version: "*"
+    repository: "file://../../services/registry"
+  - name: mongo-db
+    version: "*"
+    repository: "file://../../services/mongo-db"
+    alias: mongo-registry
+  - name: reporter
+    version: "*"
+    repository: "file://../../services/reporter"
+  - name: influx-db
+    version: "*"
+    repository: "file://../../services/influx-db"
+    alias: influx-reporter
+  - name: dashboard
+    version: "*"
+    repository: "file://../../services/dashboard"
+  - name: director
+    version: "*"
+    repository: "file://../../services/director"
+  - name: collector-events
+    version: "*"
+    repository: "file://../../services/collector-events"
+  - name: join
+    version: "*"
+    repository: "file://../../services/join"
+    alias: bluejay-join
+  - name: redis-ec
+    version: "*"
+    repository: "file://../../services/redis-ec"
+  - name: scope-manager
+    version: "*"
+    repository: "file://../../services/scope-manager"

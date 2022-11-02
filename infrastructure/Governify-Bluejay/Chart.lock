@@ -1,0 +1,39 @@
+dependencies:
+- name: assets-manager
+  repository: file://../../services/assets-manager
+  version: 0.1.0
+- name: render
+  repository: file://../../services/render
+  version: 0.1.0
+- name: registry
+  repository: file://../../services/registry
+  version: 0.1.0
+- name: mongo-db
+  repository: file://../../services/mongo-db
+  version: 0.1.0
+- name: reporter
+  repository: file://../../services/reporter
+  version: 0.1.0
+- name: influx-db
+  repository: file://../../services/influx-db
+  version: 0.1.0
+- name: dashboard
+  repository: file://../../services/dashboard
+  version: 0.1.0
+- name: director
+  repository: file://../../services/director
+  version: 0.1.0
+- name: collector-events
+  repository: file://../../services/collector-events
+  version: 0.1.0
+- name: join
+  repository: file://../../services/join
+  version: 0.1.0
+- name: redis-ec
+  repository: file://../../services/redis-ec
+  version: 0.1.0
+- name: scope-manager
+  repository: file://../../services/scope-manager
+  version: 0.1.0
+digest: sha256:af6586813d1d89ec4b8254cc123f9996876ecf77b9f431d9be024f26d1919e20
+generated: "2022-11-01T02:44:48.7499955+01:00"

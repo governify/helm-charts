@@ -1,10 +1,9 @@
 
 # CONFIGURATION PARAMETERS
 
-
 > **Note**
 >
-> The default namespace for this infrastructure is `governify-falcon`
+> The default namespace for this infrastructure is `governify-bluejay`
 
 ## GLOBAL CONFIGURATION
 
@@ -31,6 +30,13 @@
 | gov_infrastructure       	| yes          	| String   	| -                                  	| Assets local path to infrastructure file         	|
 | volume_storage       	| yes          	| String   	| 5Gi                                  	| Assets volume capacity          	|
 
+### Scope Manager
+
+| **Name**                 	| **Required** 	| **Type** 	|             **Default**            	| **Description**                                  	|
+|--------------------------	|--------------	|----------	|:----------------------------------:	|--------------------------------------------------	|
+| private_key              	| yes          	| String   	| defaultkey                         	| Scope Manager access key         	|
+
+
 ### Influx DB
 
 | **Name**                 	| **Required** 	| **Type** 	|             **Default**            	| **Description**                                  	|
@@ -42,3 +48,14 @@
 | **Name**                 	| **Required** 	| **Type** 	|             **Default**            	| **Description**                                  	|
 |--------------------------	|--------------	|----------	|:----------------------------------:	|--------------------------------------------------	|
 | volume_storage       	| yes          	| String   	| 5Gi                                  	| InfluxDB volume capacity          	|
+
+### Collector events
+
+| **Name**                 	| **Required** 	| **Type** 	|             **Default**            	| **Description**                                  	|
+|--------------------------	|--------------	|----------	|:----------------------------------:	|--------------------------------------------------	|
+| key_github              	| yes          	| String   	| -                         	| Github Token|
+| key_pivotal              	| yes          	| String   	| -                         	| Pivotal Token|
+| key_travis_public         | yes           | String   	| -                        | Travis public key|
+| key_travis_private        | yes           | String   	| -                        | Travis private key|
+| key_heroku                | yes           | String   	| -                        | Heroku token|
+| key_codeclimate           | yes           | String   	| -                        | Codeclimate token|

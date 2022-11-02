@@ -1,0 +1,6 @@
+apiVersion: v2
+name: scope-manager
+description: Helm Chart for Governify Assets Manager Service
+type: application
+version: 0.1.0
+appVersion: "v1.4.1"

@@ -1,0 +1,67 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  namespace: {{ if .Values.global.namespaceOverride }}{{.Values.global.namespaceOverride}}{{ else }}governify-{{ .Values.global.infrastructure }}{{ end }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: {{ .Values.global.node_env }}
+            - name: PORT
+              value: {{ if eq .Values.global.node_env "production"}}"80"{{ else }}"5700"{{ end }}
+            {{- if (index .Values "assets-manager").private_key }}
+            - name: KEY_ASSETS_MANAGER_PRIVATE
+              valueFrom:
+              secretKeyRef:
+                  name: {{ .Values.global.infrastructure }}-secrets
+                  key: ASSETS_PRIVATE_KEY
+            {{- end}}
+            {{- if (index .Values "scope-manager").private_key }}
+            - name: KEY_SCOPE_MANAGER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Release.Name }}-env
+                  key: SCOPE_PRIVATE_KEY
+            {{- end}}
+            {{- if .Values.key_heroku }}
+            - name: KEY_HEROKU
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.global.infrastructure }}-secrets
+                  key: KEY_HEROKU
+            {{- end}}
+            {{- if .Values.key_github }}
+            - name: KEY_GITHUB
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.global.infrastructure }}-secrets
+                  key: KEY_GITHUB
+            {{- end }}
+            - name: GOV_INFRASTRUCTURE
+              value: {{ .Values.global.gov_infrastructure }}
+                  
+          image: governify/scope-manager:{{ if eq .Values.global.node_env "production" }}{{ .Chart.AppVersion }}{{ else }}develop{{ end }}
+          imagePullPolicy: Always
+          name: {{ .Values.global.infrastructure }}-{{ .Chart.Name }}
+          ports:
+            - containerPort: {{ if eq .Values.global.node_env "production"}}80{{ else }}5700{{ end }}
+              protocol: TCP
+          resources:
+            requests:
+              memory: 400Mi
+            limits:
+              memory: 400Mi
+      securityContext: {}

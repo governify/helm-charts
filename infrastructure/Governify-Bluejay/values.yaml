@@ -1,0 +1,13 @@
+global:
+  node_env: production
+  infrastructure: bluejay
+  gov_infrastructure: http://bluejay-assets-manager/api/v1/public/infrastructure-local.yaml
+
+assets-manager:
+  gov_infrastructure: /home/project/public/infrastructure.yaml
+  assets_repository: https://github.com/governify/assets-bluejay
+  assets_repository_branch: main
+  private_key: defaultkey
+
+scope-manager:
+  private_key: defaultkey
