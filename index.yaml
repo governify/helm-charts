@@ -1,5 +1,59 @@
 apiVersion: v1
 entries:
+  Governify-Bluejay:
+  - apiVersion: v2
+    appVersion: v1.0.0
+    created: "2022-11-02T17:53:46.173671663Z"
+    dependencies:
+    - name: assets-manager
+      repository: file://../../services/assets-manager
+      version: '*'
+    - name: render
+      repository: file://../../services/render
+      version: '*'
+    - name: registry
+      repository: file://../../services/registry
+      version: '*'
+    - alias: mongo-registry
+      name: mongo-db
+      repository: file://../../services/mongo-db
+      version: '*'
+    - name: reporter
+      repository: file://../../services/reporter
+      version: '*'
+    - alias: influx-reporter
+      name: influx-db
+      repository: file://../../services/influx-db
+      version: '*'
+    - name: dashboard
+      repository: file://../../services/dashboard
+      version: '*'
+    - name: director
+      repository: file://../../services/director
+      version: '*'
+    - name: collector-events
+      repository: file://../../services/collector-events
+      version: '*'
+    - alias: bluejay-join
+      name: join
+      repository: file://../../services/join
+      version: '*'
+    - name: redis-ec
+      repository: file://../../services/redis-ec
+      version: '*'
+    - name: scope-manager
+      repository: file://../../services/scope-manager
+      version: '*'
+    description: Helm Chart for Governify Bluejay deployment on Kubernetes
+    digest: 075f6fbc34aa3a613deb11386f19555ece3c73b9ea33e81c05cd3865db6f6759
+    maintainers:
+    - name: ISA Group
+      url: https://www.isa.us.es
+    name: Governify-Bluejay
+    type: application
+    urls:
+    - https://github.com/governify/helm-charts/releases/download/Governify-Bluejay-0.1.0/Governify-Bluejay-0.1.0.tgz
+    version: 0.1.0
   Governify-Falcon:
   - apiVersion: v2
     appVersion: v1.0.0
@@ -47,4 +101,4 @@ entries:
     urls:
     - https://github.com/governify/helm-charts/releases/download/Governify-Falcon-0.1.0/Governify-Falcon-0.1.0.tgz
     version: 0.1.0
-generated: "2022-02-19T23:42:25.205458738Z"
+generated: "2022-11-02T17:53:46.345756594Z"
