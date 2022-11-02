@@ -1,5 +1,8 @@
 # Governify Helm Charts
 
+[![Artifact Hub](https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/governify)](https://artifacthub.io/packages/search?repo=governify)
+[![Release Charts](https://github.com/governify/helm-charts/actions/workflows/helm.yaml/badge.svg)](https://github.com/governify/helm-charts/actions/workflows/helm.yaml)
+
 ## Installation
 Governify Kubernetes implementation consists in a set of services embedded in Helm charts, which are used by infrastructure charts as dependencies in order to deploy each system with custom configuration.
 
