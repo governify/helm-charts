@@ -1,10 +1,10 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: bluejay-redis-ec
+  name: bluejay-mongo-registry
   namespace: governify-bluejay
   labels:
-    app: bluejay-redis-ec
+    app: bluejay-mongo-registry
 spec:
   accessModes:
     - ReadWriteOnce

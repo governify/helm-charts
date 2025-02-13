@@ -1,10 +1,10 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: bluejay-redis-ec
+  name: bluejay-influx-reporter
   namespace: governify-bluejay
   labels:
-    app: bluejay-redis-ec
+    app: bluejay-influx-reporter
 spec:
   accessModes:
     - ReadWriteOnce

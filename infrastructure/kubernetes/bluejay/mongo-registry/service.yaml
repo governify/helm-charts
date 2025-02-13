@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bluejay-mongo-registry
+  name: bluejay-mongo-registry
+  namespace: governify-bluejay
+spec:
+  type: NodePort
+  ports:
+    - name: bluejay-mongo-registry
+      port: 27017
+      protocol: TCP
+      targetPort: 27017
+      nodePort: 30017
+  selector:
+    app: bluejay-mongo-registry
