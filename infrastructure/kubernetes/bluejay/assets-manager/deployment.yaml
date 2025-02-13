@@ -1,0 +1,78 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bluejay-assets-manager
+  name: bluejay-assets-manager
+  namespace: governify-bluejay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluejay-assets-manager
+  template:
+    metadata:
+      labels:
+        app: bluejay-assets-manager
+    spec:
+      securityContext:
+        fsGroup: 1001
+        runAsUser: 1001
+        runAsGroup: 1001
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "80"
+            - name: LOGIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: USER_ASSETS
+            - name: LOGIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: PASS_ASSETS
+            - name: PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: KEY_ASSETS_MANAGER_PRIVATE
+            - name: ASSETS_REPOSITORY
+              value: https://github.com/governify/assets-bluejay
+            - name: ASSETS_REPOSITORY_BRANCH
+              value: develop
+            - name: NEW_RELIC_APP_NAME
+              value: Bluejay-Assets-Manager
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: NEW_RELIC_LICENSE_KEY
+          # - name: SERVICES_PREFIX
+          #   value: {{ .Values.global.services_prefix }}
+          # - name: DNS_SUFFIX
+          #   value: {{ .Values.global.dns_suffix }}
+
+          image: governify/assets-manager:v1.5.0
+          imagePullPolicy: Always
+          name: bluejay-assets-manager
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              memory: 300Mi
+            limits:
+              memory: 900Mi
+
+          volumeMounts:
+            - mountPath: /home/project
+              name: bluejay-assets-manager-volume
+      volumes:
+        - name: bluejay-assets-manager-volume
+          persistentVolumeClaim:
+            claimName: bluejay-assets-manager

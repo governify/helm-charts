@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bluejay-assets-manager
+  name: bluejay-assets-manager
+  namespace: governify-bluejay
+spec:
+  type: NodePort
+  ports:
+    - name: bluejay-assets-manager
+      port: 80
+      protocol: TCP
+      targetPort: 80
+      nodePort: 30200
+  selector:
+    app: bluejay-assets-manager
