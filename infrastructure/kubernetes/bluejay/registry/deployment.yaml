@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bluejay-registry
+  name: bluejay-registry
+  namespace: governify-bluejay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluejay-registry
+  template:
+    metadata:
+      labels:
+        app: bluejay-registry
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "80"
+            - name: GOV_INFRASTRUCTURE
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: GOV_INFRASTRUCTURE
+            - name: DB_HOST
+              value: bluejay-mongo-registry
+            - name: NEW_RELIC_APP_NAME
+              value: Bluejay-Registry
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: NEW_RELIC_LICENSE_KEY
+          image: governify/registry:v3.8.0
+          imagePullPolicy: Always
+          name: bluejay-registry
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              memory: 300Mi
+            limits:
+              memory: 500Mi
