@@ -28,13 +28,6 @@ spec:
                   key: GOV_INFRASTRUCTURE
             - name: DB_HOST
               value: bluejay-mongo-registry
-            - name: NEW_RELIC_APP_NAME
-              value: Bluejay-Registry
-            - name: NEW_RELIC_LICENSE_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: bluejay-secrets
-                  key: NEW_RELIC_LICENSE_KEY
           image: governify/registry:v3.8.0
           imagePullPolicy: Always
           name: bluejay-registry
