@@ -5,6 +5,7 @@ metadata:
     app: bluejay-dashboard
   name: bluejay-dashboard
   namespace: governify-bluejay
+spec:
   replicas: 1
   selector:
     matchLabels:
@@ -39,9 +40,9 @@ metadata:
               memory: 300Mi
             limits:
               memory: 500Mi
-      volumeMounts:
-        - mountPath: /var/lib/grafana
-          name: bluejay-dashboard-db-volume
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: bluejay-dashboard-db-volume
       volumes:
         - name: bluejay-dashboard-db-volume
           persistentVolumeClaim:

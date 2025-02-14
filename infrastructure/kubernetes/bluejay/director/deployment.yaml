@@ -23,7 +23,7 @@ spec:
             - name: PORT
               value: "80"
             - name: GOV_INFRASTRUCTURE
-              valeFrom:
+              valueFrom:
                 secretKeyRef:
                   key: GOV_INFRASTRUCTURE
                   name: bluejay-secrets

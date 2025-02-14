@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: bluejay-director
-  name: bluej{ay-director
+  name: bluejay-director
   namespace: governify-bluejay
 spec:
   type: NodePort
