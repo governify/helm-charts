@@ -42,7 +42,7 @@ spec:
                   key: SENDGRID_API_KEY
                   name: bluejay-secrets
 
-          image: governify/director:V1.5.0
+          image: governify/director:v1.5.0
           imagePullPolicy: Always
           name: bluejay-director
           ports:
