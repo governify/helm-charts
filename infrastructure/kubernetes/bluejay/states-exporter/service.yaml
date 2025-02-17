@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bluejay-states-exporter
+  name: bluejay-states-exporter
+  namespace: governify-bluejay
+spec:
+  type: NodePort
+  ports:
+    - name: bluejay-states-exporter
+      port: 80
+      protocol: TCP
+      targetPort: 80
+      nodePort: 30080
+  selector:
+    app: bluejay-states-exporter
