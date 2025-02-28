@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bluejay-tpa-manager
+  name: bluejay-tpa-manager
+  namespace: governify-bluejay
+spec:
+  type: NodePort
+  ports:
+    - name: bluejay-tpa-manager
+      port: 80
+      protocol: TCP
+      targetPort: 80
+      nodePort: 30173
+  selector:
+    app: bluejay-tpa-manager

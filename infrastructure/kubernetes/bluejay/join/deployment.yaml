@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bluejay-join
+  name: bluejay-join
+  namespace: governify-bluejay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluejay-join
+  template:
+    metadata:
+      labels:
+        app: bluejay-join
+    spec:
+      containers:
+        - image: governify/join-bluejay:develop
+          imagePullPolicy: Always
+          name: bluejay-join
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              memory: 300Mi
+            limits:
+              memory: 500Mi
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html/config.json
+              subPath: config.join.json
+              name: config-volume
+      volumes:
+        - name: config-volume
+          configMap:
+            name: join-config
