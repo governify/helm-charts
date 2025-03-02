@@ -1,3 +1,4 @@
 **/charts/**
 env-local.yaml
 secrets.yaml
+caddy.yaml

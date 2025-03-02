@@ -1,0 +1,117 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bluejay-assets-manager
+  namespace: governify-bluejay
+spec:
+  rules:
+    - host: assets.bluejay.governify.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bluejay-assets-manager
+                port:
+                  number: 80
+    - host: events.collector.bluejay.governify.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bluejay-collector-events
+                port:
+                  number: 80
+    - host: dashboard.bluejay.governify.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bluejay-dashboard
+                port:
+                  number: 3000
+    - host: director.bluejay.governify.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bluejay-director
+                port:
+                  number: 80
+    - host: exporter.bluejay.governify.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bluejay-states-exporter
+                port:
+                  number: 80
+    - host: join.bluejay.governify.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bluejay-join
+                port:
+                  number: 80
+    - host: registry.bluejay.governify.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bluejay-registry
+                port:
+                  number: 80
+    - host: reporter.bluejay.governify.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bluejay-reporter
+                port:
+                  number: 80
+    - host: scopes.bluejay.governify.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bluejay-scope-manager
+                port:
+                  number: 80
+    - host: tpa-manager.bluejay.governify.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bluejay-tpa-manager
+                port:
+                  number: 80
+    - host: ui.bluejay.governify.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: bluejay-render
+                port:
+                  number: 80

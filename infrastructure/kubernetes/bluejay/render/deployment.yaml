@@ -37,7 +37,7 @@ spec:
             - name: DEFAULT_CONTROLLER
               value: "http://bluejay-assets-manager/api/v1/public/renders/index/controller.js"
             - name: DEFAULT_MODEL
-              value: "http://bluejay-assets-manager:/api/v1/public/renders/index/model.json"
+              value: "http://bluejay-assets-manager/api/v1/public/renders/index/model.json"
             - name: LAYOUT
               value: bootstrap5.html
             - name: GOV_INFRASTRUCTURE
