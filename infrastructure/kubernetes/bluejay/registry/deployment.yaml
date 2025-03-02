@@ -28,7 +28,7 @@ spec:
                   key: GOV_INFRASTRUCTURE
             - name: DB_HOST
               value: bluejay-mongo-registry
-          image: governify/registry:v3.8.0
+          image: governify/registry:develop
           imagePullPolicy: Always
           name: bluejay-registry
           ports:

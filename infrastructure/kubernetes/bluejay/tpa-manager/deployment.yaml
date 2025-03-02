@@ -35,3 +35,6 @@ spec:
         - name: config-volume
           configMap:
             name: tpa-manager-config
+            items:
+              - key: config.tpa-manager.json
+                path: config.tpa-manager.json

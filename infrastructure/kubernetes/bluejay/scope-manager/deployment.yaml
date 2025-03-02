@@ -46,20 +46,13 @@ spec:
                 secretKeyRef:
                   name: bluejay-secrets
                   key: GOV_INFRASTRUCTURE
-            - name: NEW_RELIC_APP_NAME
-              value: "Bluejay-Scope-Manager"
-            - name: NEW_RELIC_LICENSE_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: bluejay-secrets
-                  key: NEW_RELIC_LICENSE_KEY
             - name: KEY_PIVOTAL
               valueFrom:
                 secretKeyRef:
                   name: bluejay-secrets
                   key: KEY_PIVOTAL
 
-          image: governify/scope-manager:v1.8.0
+          image: governify/scope-manager:develop
           imagePullPolicy: Always
           name: bluejay-scope-manager
           ports:

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tpa-manager-config
+  namespace: governify-bluejay
+data:
+  config.tpa-manager.json: |
+    {
+    "VITE_REGISTRY_URL": "http://localhost:30400",
+    "VITE_COLLECTOR_EVENTS_URL": "http://localhost:30500",
+    "VITE_DASHBOARD_URL": "http://localhost:30600",
+    "VITE_REPORTER_URL": "http://localhost:30300",
+    "VITE_DIRECTOR_URL": "http://localhost:30800",
+    "VITE_ASSETS_MANAGER_URL": "http://localhost:30200",
+    "VITE_SCOPE_MANAGER_URL": "http://localhost:30700",
+    "testVariable": "testValue"
+    }

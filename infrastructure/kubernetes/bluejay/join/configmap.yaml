@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: join-config
+  namespace: governify-bluejay
+data:
+  config.join.json: |
+    {
+        "scopeUrl": "http://localhost:30700",
+        "registryUrl": "http://localhost:30400",
+        "internalAssetsUrl": "http://bluejay-assets-manager",
+        "internalScopeUrl": "http://bluejay-scope-manager",
+        "renderUrl": "http://localhost:30100",
+        "dashboardUrl": "http://localhost:30600",
+        "reporterUrl": "http://localhost:30300",
+        "directorUrl": "http://localhost:30800",
+        "assetsUrl": "http://localhost:30200",
+        "testVariable": "testValue"
+    }

@@ -51,10 +51,16 @@ spec:
                 secretKeyRef:
                   name: bluejay-secrets
                   key: NEW_RELIC_LICENSE_KEY
-          # - name: SERVICES_PREFIX
-          #   value: {{ .Values.global.services_prefix }}
-          # - name: DNS_SUFFIX
-          #   value: {{ .Values.global.dns_suffix }}
+            - name: SERVICES_PREFIX
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: SERVICES_PREFIX
+            - name: DNS_SUFFIX
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: DNS_SUFFIX
 
           image: governify/assets-manager:v1.5.0
           imagePullPolicy: Always

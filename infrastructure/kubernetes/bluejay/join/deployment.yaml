@@ -35,3 +35,6 @@ spec:
         - name: config-volume
           configMap:
             name: join-config
+            items:
+              - key: config.join.json
+                path: config.join.json
