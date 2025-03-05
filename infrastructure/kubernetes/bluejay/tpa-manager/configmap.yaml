@@ -6,12 +6,12 @@ metadata:
 data:
   config.tpa-manager.json: |
     {
-    "VITE_REGISTRY_URL": "http://localhost:30400",
-    "VITE_COLLECTOR_EVENTS_URL": "http://localhost:30500",
-    "VITE_DASHBOARD_URL": "http://localhost:30600",
-    "VITE_REPORTER_URL": "http://localhost:30300",
-    "VITE_DIRECTOR_URL": "http://localhost:30800",
-    "VITE_ASSETS_MANAGER_URL": "http://localhost:30200",
-    "VITE_SCOPE_MANAGER_URL": "http://localhost:30700",
+    "VITE_REGISTRY_URL": "https://registry.bluejay.k8s.governify.io",
+    "VITE_COLLECTOR_EVENTS_URL": "https://events.collector.bluejay.k8s.governify.io",
+    "VITE_DASHBOARD_URL": "https://dashboard.bluejay.k8s.governify.io",
+    "VITE_REPORTER_URL": "https://reporter.bluejay.k8s.governify.io",
+    "VITE_DIRECTOR_URL": "https://director.bluejay.k8s.governify.io",
+    "VITE_ASSETS_MANAGER_URL": "https://assets.bluejay.k8s.governify.io",
+    "VITE_SCOPE_MANAGER_URL": "https://scopes.bluejay.k8s.governify.io",
     "testVariable": "testValue"
     }

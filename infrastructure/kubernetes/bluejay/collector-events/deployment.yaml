@@ -71,7 +71,7 @@ spec:
                   name: bluejay-secrets
                   key: GOV_INFRASTRUCTURE
 
-          image: governify/collector-events:v1.22.3
+          image: governify/collector-events:develop
           imagePullPolicy: Always
           name: bluejay-collector-events
           ports:

@@ -6,14 +6,14 @@ metadata:
 data:
   config.join.json: |
     {
-        "scopeUrl": "http://localhost:30700",
-        "registryUrl": "http://localhost:30400",
+        "scopeUrl": "https://scopes.bluejay.k8s.governify.io",
+        "registryUrl": "https://registry.bluejay.k8s.governify.io",
         "internalAssetsUrl": "http://bluejay-assets-manager",
         "internalScopeUrl": "http://bluejay-scope-manager",
-        "renderUrl": "http://localhost:30100",
-        "dashboardUrl": "http://localhost:30600",
-        "reporterUrl": "http://localhost:30300",
-        "directorUrl": "http://localhost:30800",
-        "assetsUrl": "http://localhost:30200",
+        "renderUrl": "https://ui.bluejay.k8s.governify.io",
+        "dashboardUrl": "https://dashboard.bluejay.k8s.governify.io",
+        "reporterUrl": "https://reporter.bluejay.k8s.governify.io",
+        "directorUrl": "https://director.bluejay.k8s.governify.io",
+        "assetsUrl": "https://assets.bluejay.k8s.governify.io",
         "testVariable": "testValue"
     }

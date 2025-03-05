@@ -1,11 +1,11 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: bluejay-assets-manager
+  name: bluejay-ingress
   namespace: governify-bluejay
 spec:
   rules:
-    - host: assets.bluejay.governify.local
+    - host: assets.bluejay.k8s.governify.io
       http:
         paths:
           - path: /
@@ -15,7 +15,7 @@ spec:
                 name: bluejay-assets-manager
                 port:
                   number: 80
-    - host: events.collector.bluejay.governify.local
+    - host: events.collector.bluejay.k8s.governify.io
       http:
         paths:
           - path: /
@@ -25,7 +25,7 @@ spec:
                 name: bluejay-collector-events
                 port:
                   number: 80
-    - host: dashboard.bluejay.governify.local
+    - host: dashboard.bluejay.k8s.governify.io
       http:
         paths:
           - path: /
@@ -35,7 +35,7 @@ spec:
                 name: bluejay-dashboard
                 port:
                   number: 3000
-    - host: director.bluejay.governify.local
+    - host: director.bluejay.k8s.governify.io
       http:
         paths:
           - path: /
@@ -45,7 +45,7 @@ spec:
                 name: bluejay-director
                 port:
                   number: 80
-    - host: exporter.bluejay.governify.local
+    - host: exporter.bluejay.k8s.governify.io
       http:
         paths:
           - path: /
@@ -55,7 +55,7 @@ spec:
                 name: bluejay-states-exporter
                 port:
                   number: 80
-    - host: join.bluejay.governify.local
+    - host: join.bluejay.k8s.governify.io
       http:
         paths:
           - path: /
@@ -65,7 +65,7 @@ spec:
                 name: bluejay-join
                 port:
                   number: 80
-    - host: registry.bluejay.governify.local
+    - host: registry.bluejay.k8s.governify.io
       http:
         paths:
           - path: /
@@ -75,7 +75,7 @@ spec:
                 name: bluejay-registry
                 port:
                   number: 80
-    - host: reporter.bluejay.governify.local
+    - host: reporter.bluejay.k8s.governify.io
       http:
         paths:
           - path: /
@@ -85,7 +85,7 @@ spec:
                 name: bluejay-reporter
                 port:
                   number: 80
-    - host: scopes.bluejay.governify.local
+    - host: scopes.bluejay.k8s.governify.io
       http:
         paths:
           - path: /
@@ -95,7 +95,7 @@ spec:
                 name: bluejay-scope-manager
                 port:
                   number: 80
-    - host: tpa-manager.bluejay.governify.local
+    - host: tpa-manager.bluejay.k8s.governify.io
       http:
         paths:
           - path: /
@@ -105,7 +105,7 @@ spec:
                 name: bluejay-tpa-manager
                 port:
                   number: 80
-    - host: ui.bluejay.governify.local
+    - host: ui.bluejay.k8s.governify.io
       http:
         paths:
           - path: /

@@ -38,14 +38,14 @@ metadata:
   name: caddy-ingress-controller-configmap
   namespace: caddy-system
 data:
-  acmeCA: "https://acme-staging-v02.api.letsencrypt.org/directory"
+  acmeCA: "https://acme-v02.api.letsencrypt.org/directory"
   acmeEABKeyId: ""
   acmeEABMacKey: ""
   debug: "true"
   email: ""
   experimentalSmartSort: "false"
   metrics: "true"
-  onDemandTLS: "true"
+  onDemandTLS: "false"
   proxyProtocol: "false"
 ---
 # Source: caddy-ingress-controller/templates/clusterrole.yaml
