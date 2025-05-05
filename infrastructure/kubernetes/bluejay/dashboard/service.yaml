@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: bluejay-dashboard
+  name: bluejay-dashboard
+  namespace: governify-bluejay
+spec:
+  type: NodePort
+  ports:
+    - name: bluejay-dashboard
+      port: 3000
+      protocol: TCP
+      targetPort: 3000
+      nodePort: 30600
+  selector:
+    app: bluejay-dashboard

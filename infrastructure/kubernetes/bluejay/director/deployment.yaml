@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bluejay-director
+  name: bluejay-director
+  namespace: governify-bluejay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluejay-director
+  template:
+    metadata:
+      labels:
+        app: bluejay-director
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "80"
+            - name: GOV_INFRASTRUCTURE
+              valueFrom:
+                secretKeyRef:
+                  key: GOV_INFRASTRUCTURE
+                  name: bluejay-secrets
+            - name: INFLUXDB_BIND_ADDRESS
+              value: "8088"
+            - name: NEW_RELIC_APP_NAME
+              value: "Bluejay-Director"
+            - name: NEW_RELIC_LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: NEW_RELIC_LICENSE_KEY
+                  name: bluejay-secrets
+            - name: SENDGRID_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: SENDGRID_API_KEY
+                  name: bluejay-secrets
+
+          image: governify/director:v1.5.0
+          imagePullPolicy: Always
+          name: bluejay-director
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              memory: 300Mi
+            limits:
+              memory: 400Mi

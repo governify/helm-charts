@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bluejay-tpa-manager
+  name: bluejay-tpa-manager
+  namespace: governify-bluejay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluejay-tpa-manager
+  template:
+    metadata:
+      labels:
+        app: bluejay-tpa-manager
+    spec:
+      containers:
+        - image: governify/tpa-manager:develop
+          imagePullPolicy: Always
+          name: bluejay-tpa-manager
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              memory: 500Mi
+            limits:
+              memory: 700Mi
+          volumeMounts:
+            - mountPath: /usr/share/nginx/html/config.json
+              subPath: config.tpa-manager.json
+              name: config-volume
+      volumes:
+        - name: config-volume
+          configMap:
+            name: tpa-manager-config
+            items:
+              - key: config.tpa-manager.json
+                path: config.tpa-manager.json

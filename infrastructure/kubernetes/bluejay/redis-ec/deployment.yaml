@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bluejay-redis-ec
+  name: bluejay-redis-ec
+  namespace: governify-bluejay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluejay-redis-ec
+  template:
+    metadata:
+      labels:
+        app: bluejay-redis-ec
+    spec:
+      containers:
+        - image: redis:latest
+          imagePullPolicy: Always
+          name: bluejay-redis-ec
+          ports:
+            - containerPort: 6379
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /data
+              name: bluejay-redis-ec-db-volume
+      volumes:
+        - name: bluejay-redis-ec-db-volume
+          persistentVolumeClaim:
+            claimName: bluejay-redis-ec

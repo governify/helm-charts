@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bluejay-scope-manager
+  name: bluejay-scope-manager
+  namespace: governify-bluejay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluejay-scope-manager
+  template:
+    metadata:
+      labels:
+        app: bluejay-scope-manager
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "80"
+            - name: KEY_ASSETS_MANAGER_PRIVATE
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: KEY_ASSETS_MANAGER_PRIVATE
+            - name: KEY_SCOPE_MANAGER
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: KEY_SCOPE_MANAGER
+            - name: KEY_HEROKU
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: KEY_HEROKU
+            - name: KEY_GITHUB
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: KEY_GITHUB
+            - name: GOV_INFRASTRUCTURE
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: GOV_INFRASTRUCTURE
+            - name: KEY_PIVOTAL
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: KEY_PIVOTAL
+
+          image: governify/scope-manager:develop
+          imagePullPolicy: Always
+          name: bluejay-scope-manager
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              memory: 400Mi
+            limits:
+              memory: 400Mi

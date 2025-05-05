@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bluejay-dashboard
+  name: bluejay-dashboard
+  namespace: governify-bluejay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluejay-dashboard
+  template:
+    metadata:
+      labels:
+        app: bluejay-dashboard
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: production
+            - name: GOV_INFRASTRUCTURE
+              valueFrom:
+                secretKeyRef:
+                  name: bluejay-secrets
+                  key: GOV_INFRASTRUCTURE
+            - name: INFLUX_URL
+              value: http://bluejay-influx-reporter:8086
+            - name: GF_PATHS_PLUGINS
+              value: /usr/share/grafana/plugins
+
+          image: governify/dashboard:v1.1.0
+          imagePullPolicy: Always
+          name: bluejay-dashboard
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+          resources:
+            requests:
+              memory: 300Mi
+            limits:
+              memory: 500Mi
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: bluejay-dashboard-db-volume
+      volumes:
+        - name: bluejay-dashboard-db-volume
+          persistentVolumeClaim:
+            claimName: bluejay-dashboard

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bluejay-reporter
+  name: bluejay-reporter
+  namespace: governify-bluejay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluejay-reporter
+  template:
+    metadata:
+      labels:
+        app: bluejay-reporter
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "80"
+            - name: DB_HOST
+              value: influxdb
+            - name: GOV_INFRASTRUCTURE
+              valueFrom:
+                secretKeyRef:
+                  key: GOV_INFRASTRUCTURE
+                  name: bluejay-secrets
+
+          image: governify/reporter:v2.9.1
+          imagePullPolicy: Always
+          name: bluejay-reporter
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            requests:
+              memory: 300Mi
+            limits:
+              memory: 500Mi
+          volumeMounts:
+            - mountPath: /opt/app/logs
+              name: bluejay-reporter-logs
+      volumes:
+        - name: bluejay-reporter-logs
+          persistentVolumeClaim:
+            claimName: bluejay-reporter

@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: bluejay-states-exporter
+  name: bluejay-states-exporter
+  namespace: governify-bluejay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bluejay-states-exporter
+  template:
+    metadata:
+      labels:
+        app: bluejay-states-exporter
+    spec:
+      containers:
+        - env:
+            - name: NODE_ENV
+              value: production
+            - name: PORT
+              value: "80"
+            - name: MONGO_URL
+              value: mongodb://bluejay-mongo-registry:27017
+
+          image: alesancor1/governify-states-exporter
+          imagePullPolicy: Always
+          name: bluejay-states-exporter
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          resources:
+            limits:
+              memory: 400Mi

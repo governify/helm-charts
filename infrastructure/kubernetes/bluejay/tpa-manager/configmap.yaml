@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tpa-manager-config
+  namespace: governify-bluejay
+data:
+  config.tpa-manager.json: |
+    {
+    "VITE_REGISTRY_URL": "https://registry.bluejay.k8s.governify.io",
+    "VITE_COLLECTOR_EVENTS_URL": "https://events.collector.bluejay.k8s.governify.io",
+    "VITE_DASHBOARD_URL": "https://dashboard.bluejay.k8s.governify.io",
+    "VITE_REPORTER_URL": "https://reporter.bluejay.k8s.governify.io",
+    "VITE_DIRECTOR_URL": "https://director.bluejay.k8s.governify.io",
+    "VITE_ASSETS_MANAGER_URL": "https://assets.bluejay.k8s.governify.io",
+    "VITE_SCOPE_MANAGER_URL": "https://scopes.bluejay.k8s.governify.io",
+    "testVariable": "testValue"
+    }
